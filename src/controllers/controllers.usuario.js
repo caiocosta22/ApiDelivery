@@ -1,20 +1,21 @@
+import modelUsuario from "../models/model.usuario.js";
 
-
- //const Login = (req, res) =>{} e a mesma coisa que isso debaixo
 function Login(req, res){
-    res.status(200).json({id_usuario: 123});
-};
 
-function Inserir(req, res){
-    res.status(200).json({id_usuario: 123});
-};
+    modelUsuario.Login(req.body.email, req.body.senha, function(err, result){
+        if (err) {
+            res.status(500).send(err);
+        } else  if (result.length == 0) {
+            res.status(401).json({erro: "E-mail ou senha invalida"});
+        }    else {
+                let resultado = result[0];
+                resultado["token"] = "0000000000000000000000000"
 
-function ListarId(req, res){
-    res.status(201).json({id_usuario: req.params.id_usuario});
-};
+                res.status(200).json(resultado);
+            }
+    });
+}
 
-function Editar(req, res){
-    res.status(200).json({id_usuario: 123});
-};
+    
 
-export default {Login, Inserir, ListarId, Editar};
+export default {Login};

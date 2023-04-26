@@ -5,9 +5,7 @@
   "description": "Api node",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev":"nodemon src/index.js"
-  },
+    "test": "echo \"Error: no test specified\" && exit 1"},
   "author": "Caio Costa",
   "license": "ISC",
   "dependencies": {
