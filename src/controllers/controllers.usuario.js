@@ -16,6 +16,30 @@ function Login(req, res){
     });
 }
 
-    
+function ListarId(req, res){
+    req.id_usuario=1; //vai ser obtido pelo token, fazer teste
+    // - condicao para so permitir visualizar o usuario coletado no token
+    //if (req.params.id_usuario != req.id_usuario){
+    //    return res.status(401).json({erro:"Operacao nao permitida:voce so pode obter informacoes do seu usuario."})
+    //}
+    modelUsuario.ListarId(req.params.id_usuario, function(err, result){
+        if (err){
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(result[0]);
+        }
+    });
+};
 
-export default {Login};
+function Editar(req, res){
+    req.id_usuario=1;
+    modelUsuario.Editar(req.params.id_usuario, req.body.nome, req.body.email, function(err, result){
+        if (err){
+            res.status(500).send(err);
+        } else {
+            res.status(200).json({id_usuario: req.id_usuario});
+        }
+    });
+};
+
+export default {Login, ListarId,Editar};
